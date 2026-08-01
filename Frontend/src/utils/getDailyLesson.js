@@ -1,6 +1,7 @@
 const DAY_IN_MS = 86_400_000
 const START_YEAR = 2026
 
+// esto sirve para obtener la fecha local
 const getLocalCalendarTimestamp = (date) => {
   if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
     return null
@@ -12,7 +13,7 @@ const getLocalCalendarTimestamp = (date) => {
     date.getDate(),
   )
 }
-
+//  esto sirve para obtener la cantidad de dias desde el inicio
 const getDaysSinceStart = (date) => {
   const currentDayTimestamp = getLocalCalendarTimestamp(date)
 
@@ -27,6 +28,7 @@ const getDaysSinceStart = (date) => {
   )
 }
 
+// esto sirve para obtener la leccion diaria
 export const getDailyLessonIndex = (
   lessonsLength,
   date = new Date(),
@@ -46,6 +48,7 @@ export const getDailyLessonIndex = (
   ) % lessonsLength
 }
 
+// esto sirve para obtener la leccion diaria
 export const getDailyLesson = (
   lessons,
   date = new Date(),
