@@ -7,7 +7,7 @@ import lightIcon from "../assets/light.png"
 import verbs from "../data/verbs.json"
 import { getDailyLesson } from "../utils/getDailyLesson.js"
 import { getRandomLesson } from "../utils/getRandomLesson.js"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 
 
@@ -44,6 +44,7 @@ const renderSentence = (sentence, conjugation) => {
         </>
     )
 }
+
 
 
 const Widget = () => {
@@ -87,6 +88,52 @@ const Widget = () => {
         }
     }
 
+    const getMillisecondsUntilNextDay = () => {
+
+        const currentDate = new Date();
+        const currentDay = currentDate.getDate();
+
+        const nextDay = new Date(currentDate);
+        nextDay.setDate(currentDay + 1);
+
+        nextDay.setHours(0, 0, 0, 0);
+
+        return (
+            nextDay.getTime() - currentDate.getTime()
+        )
+    }
+
+    useEffect(() => {
+        let timerId
+
+        function scheduleChange() {
+            // obtenemos la cantidad de milisegundos que faltan para el siguiente día
+            const milisegundosRestantes = getMillisecondsUntilNextDay()
+
+            // creamos el temporizador
+            timerId = setTimeout(() => {
+                // actualizamos el estado cuando el tiempo se acaba
+                const newDailyLesson = getDailyLesson(verbs)
+
+                // evita actualizar el estado con valor null
+                if (newDailyLesson) {
+                    // cambia la leccion
+                    setActiveLesson(newDailyLesson)
+                }
+
+                scheduleChange()
+            }, milisegundosRestantes)
+        }
+
+        scheduleChange()
+
+        // limpiamos el temporizador
+        return () => {
+            // cancelamos el temporizador
+            clearTimeout(timerId)
+        }
+    }, [])
+
     const title = [activeLesson.category, activeLesson.level].map(getText).filter(Boolean).join(" - ")
     const detailItems = [
         { icon: chainIcon, field: "baseVerb", value: activeLesson.baseVerb, labelClassName: "text-gray-600 text-sm" },
@@ -95,6 +142,8 @@ const Widget = () => {
         { icon: calendarIcon, field: "tense", value: activeLesson.tense, labelClassName: "text-gray-600 font-sm" },
         { icon: profileIcon, field: "subject", value: activeLesson.subject, labelClassName: "text-gray-600 text-sm" },
     ]
+
+
 
     return (
         // 1. Contenedor Principal: Sombra suave y bordes redondeados modernos
