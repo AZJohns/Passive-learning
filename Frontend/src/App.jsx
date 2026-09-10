@@ -1,6 +1,5 @@
 import './App.css'
-import Widget from './components/Widget.jsx'
-
+import Widget from './components/widget'
 
 function App() {
 

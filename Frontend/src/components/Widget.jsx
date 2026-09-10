@@ -50,6 +50,37 @@ const renderSentence = (sentence, conjugation) => {
 const Widget = () => {
     const [activeLesson, setActiveLesson] = useState(getDailyLesson(verbs))
 
+    useEffect(() => {
+        let timerId
+
+        function scheduleChange() {
+            // obtenemos la cantidad de milisegundos que faltan para el siguiente día
+            const milisegundosRestantes = getMillisecondsUntilNextDay()
+
+            // creamos el temporizador
+            timerId = setTimeout(() => {
+                // actualizamos el estado cuando el tiempo se acaba
+                const newDailyLesson = getDailyLesson(verbs)
+
+                // evita actualizar el estado con valor null
+                if (newDailyLesson) {
+                    // cambia la leccion
+                    setActiveLesson(newDailyLesson)
+                }
+
+                scheduleChange()
+            }, milisegundosRestantes)
+        }
+
+        scheduleChange()
+
+        // limpiamos el temporizador
+        return () => {
+            // cancelamos el temporizador
+            clearTimeout(timerId)
+        }
+    }, [])
+
     if (!activeLesson || typeof activeLesson !== "object") {
         return (
             <section className="bg-white max-w-200 h-auto p-1 m-1 border border-black rounded-3xl flex flex-col gap-3 [&_span]:text-blue-600" >
@@ -103,36 +134,7 @@ const Widget = () => {
         )
     }
 
-    useEffect(() => {
-        let timerId
 
-        function scheduleChange() {
-            // obtenemos la cantidad de milisegundos que faltan para el siguiente día
-            const milisegundosRestantes = getMillisecondsUntilNextDay()
-
-            // creamos el temporizador
-            timerId = setTimeout(() => {
-                // actualizamos el estado cuando el tiempo se acaba
-                const newDailyLesson = getDailyLesson(verbs)
-
-                // evita actualizar el estado con valor null
-                if (newDailyLesson) {
-                    // cambia la leccion
-                    setActiveLesson(newDailyLesson)
-                }
-
-                scheduleChange()
-            }, milisegundosRestantes)
-        }
-
-        scheduleChange()
-
-        // limpiamos el temporizador
-        return () => {
-            // cancelamos el temporizador
-            clearTimeout(timerId)
-        }
-    }, [])
 
     const title = [activeLesson.category, activeLesson.level].map(getText).filter(Boolean).join(" - ")
     const detailItems = [
@@ -145,65 +147,95 @@ const Widget = () => {
 
 
 
-    return (
-        // 1. Contenedor Principal: Sombra suave y bordes redondeados modernos
-        <section className="bg-white max-w-200 h-90 p-3 m-1 border border-gray-100 shadow-xl shadow-blue-900/5 rounded-3xl flex flex-col justify-between overflow-hidden [&_span]:text-blue-600">
+   return (
+    <section className="w-full h-full box-border bg-white px-4 py-3 border border-gray-100 shadow-xl shadow-blue-900/5 rounded-2xl flex flex-col gap-2 overflow-hidden [&_span]:text-blue-600">
 
-            {/* 2. Cabecera (Categoría y Botón aleatorio) */}
-            <article className="flex shrink-0 items-center justify-between px-3 pt-1">
-                <div className="flex items-center gap-2">
-                    <img className="w-8 h-8 shrink-0" src={bookIcon} alt="" />
-                    <h1 className="font-extrabold text-sm text-blue-700 tracking-wider uppercase">
-                        {title}
-                    </h1>
+        {/* Cabecera */}
+        <article className="flex shrink-0 items-center justify-between">
+            <div className="flex items-center gap-2 min-w-0">
+                <img
+                    className="w-7 h-7 shrink-0"
+                    src={bookIcon}
+                    alt=""
+                />
+
+                <h1 className="font-extrabold text-sm text-blue-700 tracking-wider uppercase">
+                    {title}
+                </h1>
+            </div>
+
+            <button
+                className="shrink-0 p-1.5 rounded-full hover:bg-blue-50 transition-colors"
+                onClick={handleClick}
+            >
+                <img
+                    className="w-7 h-7 hover:cursor-pointer"
+                    src={bookIcon}
+                    alt="Random"
+                />
+            </button>
+        </article>
+
+
+        {/* Frase principal */}
+        <article className="flex min-h-[68px] flex-col items-center justify-center px-3">
+            <h2 className="text-center font-black text-[19px] leading-[1.15] uppercase tracking-tight text-gray-800">
+                {renderSentence(
+                    activeLesson.sentence,
+                    activeLesson.conjugation
+                )}
+            </h2>
+
+            <p className="mt-1 text-center text-xs leading-snug font-medium text-gray-500">
+                {getText(activeLesson.sentenceTranslation)}
+            </p>
+        </article>
+
+
+        {/* Separador */}
+        <hr className="w-[94%] mx-auto border-gray-100 shrink-0" />
+
+
+        {/* Información gramatical */}
+        <article className="grid w-full grid-cols-5 gap-1 shrink-0">
+            {detailItems.map((item) => (
+                <div
+                    className="min-w-0 flex flex-col items-center justify-start gap-0.5 px-0.5"
+                    key={item.field}
+                >
+                    <img
+                        className="w-4 h-4 shrink-0 opacity-70"
+                        src={item.icon}
+                        alt=""
+                    />
+
+                    <p className="w-full text-center text-[8px] leading-tight font-bold text-gray-400 uppercase">
+                        {getFieldLabel(item.field)}
+                    </p>
+
+                    <h3 className="w-full text-center font-extrabold text-[11px] leading-tight text-gray-800 capitalize break-words">
+                        {getText(item.value)}
+                    </h3>
                 </div>
-                <button className="shrink-0 p-2 rounded-full hover:bg-blue-50 transition-colors" onClick={handleClick}>
-                    <img className="w-8 h-8 hover:cursor-pointer" src={bookIcon} alt="Random" />
-                </button>
-            </article>
+            ))}
+        </article>
 
-            {/* 3. Oración Principal (Con más respiro) */}
-            <article className="flex flex-col items-center justify-center px-4 shrink-0">
-                <h2 className="text-center font-black text-2xl sm:text-3xl uppercase tracking-tight text-gray-800">
-                    {renderSentence(activeLesson.sentence, activeLesson.conjugation)}
-                </h2>
-                <p className="text-center text-sm font-medium text-gray-500 mt-1">
-                    {getText(activeLesson.sentenceTranslation)}
-                </p>
-            </article>
 
-            {/* Línea divisoria muy sutil para separar secciones */}
-            <hr className="w-[85%] mx-auto border-gray-100 shrink-0" />
+        {/* Regla */}
+        <article className="bg-blue-50/80 border border-blue-100 px-3 py-2 flex items-center justify-center gap-2 shrink-0 rounded-xl min-h-10">
+            <img
+                className="w-5 h-5 shrink-0 opacity-80"
+                src={lightIcon}
+                alt="Tip"
+            />
 
-            {/* 4. Grid de 5 Columnas (Diseño App: Icono+Etiqueta arriba, Valor abajo) */}
-            <article className="grid w-full grid-cols-5 gap-1 px-2 shrink-0">
-                {detailItems.map((item) => (
-                    <div className="flex flex-col items-center justify-center gap-1.5 p-2 rounded-2xl hover:bg-gray-50 transition-colors" key={item.field}>
-                        {/* Icono y Etiqueta */}
-                        <div className="flex flex-col lg:flex-row items-center justify-center gap-1">
-                            <img className="w-5 h-5 sm:w-6 sm:h-6 opacity-70" src={item.icon} alt="" />
-                            <p className={`${item.labelClassName} text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider`}>
-                                {getFieldLabel(item.field)}
-                            </p>
-                        </div>
-                        {/* Valor Destacado */}
-                        <h3 className="font-extrabold text-sm sm:text-base text-gray-800 text-center w-full truncate capitalize">
-                            {getText(item.value)}
-                        </h3>
-                    </div>
-                ))}
-            </article>
+            <p className="min-w-0 text-xs leading-snug font-semibold text-blue-700 text-center">
+                {getText(activeLesson.rule)}
+            </p>
+        </article>
 
-            {/* 5. Tarjeta de Regla / Tip (Fondo azul suave nativo) */}
-            <article className="bg-blue-50/80 border border-blue-100 mx-3 mb-1 p-3 flex flex-row items-center justify-center gap-3 shrink-0 rounded-2xl h-16">
-                <img className="w-6 h-6 shrink-0 opacity-80" src={lightIcon} alt="Tip" />
-                <p className="min-w-0 line-clamp-2 text-sm font-semibold text-blue-700 text-center">
-                    {getText(activeLesson.rule)}
-                </p>
-            </article>
-
-        </section>
-    );
+    </section>
+);
 }
 
 export default Widget;
