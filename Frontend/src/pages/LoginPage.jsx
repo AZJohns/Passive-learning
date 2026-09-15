@@ -49,7 +49,7 @@ export default function LoginPage() {
                                 K
                             </div>
                             <span className="text-xl font-bold text-slate-800">
-                                Kaprichos <span className="text-blue-600">Admin</span>
+                                Passive-Learning <span className="text-blue-600">Admin</span>
                             </span>
                         </div>
 
@@ -141,7 +141,7 @@ export default function LoginPage() {
 
                 {/* Footer */}
                 <p className="text-center text-xs text-slate-400 mt-5">
-                    &copy; {new Date().getFullYear()} Kaprichos. Todos los derechos reservados.
+                    &copy; {new Date().getFullYear()} Passive-Learning. Todos los derechos reservados.
                 </p>
             </div>
         </div>
