@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "Passive Learning",
-        "width": 440,
-        "height": 250,
+        "width": 480,
+        "height": 280,
         "resizable": false,
         "fullscreen": false,
         "decorations": false

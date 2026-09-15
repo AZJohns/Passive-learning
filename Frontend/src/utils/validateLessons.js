@@ -25,6 +25,7 @@ export const allowedTenses = [
   "Be going to",
 ]
 
+
 const allowedLevels = ["A1", "A2"]
 const stringFields = requiredLessonFields.filter(
   (field) => field !== "id" && field !== "irregular",
@@ -95,6 +96,7 @@ export const validateLessons = (lessons) => {
       errors.push(`${label} does not include the conjugation in the sentence.`)
     }
   })
+
 
   return errors
 }

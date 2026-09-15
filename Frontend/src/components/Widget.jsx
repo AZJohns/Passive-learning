@@ -94,8 +94,12 @@ const Widget = () => {
             </section>
         )
     }
-
-    // crea una función manejadora para el clic.
+    const valideLesson = (lesson) => {
+        if (lesson) {
+            return true
+        }
+        return false
+    }
 
     const activeRandomLesson = function (getRandomLesson, verbs, currentLessonId) {
         // 1. Ahora SÍ le pasas ambos datos a la función que busca la lección
@@ -148,7 +152,7 @@ const Widget = () => {
 
 
    return (
-    <section className="w-full h-full box-border bg-white px-4 py-3 border border-gray-100 shadow-xl shadow-blue-900/5 rounded-2xl flex flex-col gap-2 overflow-hidden [&_span]:text-blue-600">
+    <section className="w-full h-full box-border bg-white px-4 py-3 border border-gray-100 shadow-xl shadow-blue-900/5 rounded-2xl flex flex-col gap-2 [&_span]:text-blue-600">
 
         {/* Cabecera */}
         <article className="flex shrink-0 items-center justify-between">
@@ -178,7 +182,7 @@ const Widget = () => {
 
 
         {/* Frase principal */}
-        <article className="flex min-h-[68px] flex-col items-center justify-center px-3">
+        <article className="flex min-h-[68px] flex-1 flex-col items-center justify-center px-3">
             <h2 className="text-center font-black text-[19px] leading-[1.15] uppercase tracking-tight text-gray-800">
                 {renderSentence(
                     activeLesson.sentence,
@@ -197,7 +201,7 @@ const Widget = () => {
 
 
         {/* Información gramatical */}
-        <article className="grid w-full grid-cols-5 gap-1 shrink-0">
+        <article className="grid w-full grid-cols-[minmax(0,0.7fr)_minmax(0,1.45fr)_minmax(0,1fr)_minmax(0,1.55fr)_minmax(0,1.1fr)] gap-1 shrink-0">
             {detailItems.map((item) => (
                 <div
                     className="min-w-0 flex flex-col items-center justify-start gap-0.5 px-0.5"
@@ -213,7 +217,7 @@ const Widget = () => {
                         {getFieldLabel(item.field)}
                     </p>
 
-                    <h3 className="w-full text-center font-extrabold text-[11px] leading-tight text-gray-800 capitalize break-words">
+                    <h3 className="w-full text-center font-extrabold text-[11px] leading-tight text-gray-800 capitalize break-normal whitespace-normal">
                         {getText(item.value)}
                     </h3>
                 </div>
