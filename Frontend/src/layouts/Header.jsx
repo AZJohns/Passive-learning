@@ -85,31 +85,35 @@ export default function Header() {
                 <div className="hidden items-center gap-3 md:flex">
                     <NavLink
                         to="/login"
-                        className="
-              rounded-md px-4 py-2
-              text-sm font-semibold text-secondary
-              transition-colors
-              hover:bg-bg hover:text-text
-            "
+                        className=" rounded-md px-4 py-2 text-sm font-semibold text-secondary transition-colors hover:bg-bg hover:text-text "
                     >
                         Iniciar sesión
                     </NavLink>
 
                     <NavLink
                         to="/register"
-                        className="
-              rounded-md bg-primary px-4 py-2
-              text-sm font-semibold text-white
-              transition-colors
-              hover:bg-primary-hover
-              active:bg-primary-active
-            "
+                        className=" rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-hover active:bg-primary-active "
                     >
                         Crear cuenta
                     </NavLink>
                 </div>
 
             </div>
+            {/* <section className="text-center max-w-xl mx-auto mb-10 md:mb-12">
+                <div className="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container text-on-surface-variant mb-3 shadow-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                    <span className="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Lección de hoy · 24 de Octubre</span>
+                </div>
+                <h1 className="font-headline-lg text-headline-lg tracking-tight text-on-surface mb-2">Inmersión Diaria Asistida</h1>
+                <p className="font-body-base text-body-base text-secondary max-w-md mx-auto">
+                    Aprende mediante exposición natural y contextual, asimilando patrones sin memorización forzada.
+                </p>
+            </section> */}
         </header>
+
+
+
+
+
     );
 }
