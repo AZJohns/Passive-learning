@@ -2,7 +2,7 @@ import Header from "../layouts/Header.jsx";
 import HeroPage from "../components/HeroPage.jsx";
 import bookMark from "../assets/icons/bookmark_border.png"
 import copy from "../assets/icons/content_copy.png"
-import LessonCard from "../components/LessonCard.jsx";
+import LessonSentence from "../components/lesson/LessonSentence.jsx";
 
 export default function Home() {
     return (
@@ -37,8 +37,8 @@ export default function Home() {
                                 </button>
                             </div>
                         </div>
-                        {/* aqui va mi lesson card */}
-                        <LessonCard />
+                        {/* aqui va mi componente*/}
+                        <LessonSentence />
                     </div>
                 </article>
             </main>
