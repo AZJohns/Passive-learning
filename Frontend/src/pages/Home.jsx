@@ -2,8 +2,7 @@ import Header from "../layouts/Header.jsx";
 import HeroPage from "../components/HeroPage.jsx";
 import bookMark from "../assets/icons/bookmark_border.png"
 import copy from "../assets/icons/content_copy.png"
-import LessonSentence from "../components/lesson/LessonSentence.jsx";
-
+import TodayCard from "../components/lesson/TodayLessonCard.jsx";
 export default function Home() {
     return (
         <>
@@ -38,7 +37,7 @@ export default function Home() {
                             </div>
                         </div>
                         {/* aqui va mi componente*/}
-                        <LessonSentence />
+                       <TodayCard />
                     </div>
                 </article>
             </main>

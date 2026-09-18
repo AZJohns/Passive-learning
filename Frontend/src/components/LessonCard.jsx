@@ -27,6 +27,9 @@ const getFieldLabel = (field) =>
         .trim()
         .toUpperCase()
 
+        
+
+
 const renderSentence = (sentence, conjugation) => {
     const sentenceText = getText(sentence)
     const conjugationText = getText(conjugation)

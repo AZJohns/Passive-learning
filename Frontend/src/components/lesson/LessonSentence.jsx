@@ -1,7 +1,6 @@
 import bookIcon from "../../assets/book.svg"
 import verbs from "../../data/verbs.json"
 import { getDailyLesson } from "../../utils/getDailyLesson.js"
-import { useState } from "react"
 
 const getText = (value) => {
     if (typeof value === "string" || typeof value === "number") {
@@ -11,8 +10,8 @@ const getText = (value) => {
     return ""
 }
 
-const LessonSentence = () => {
-    const [activeLesson, setActiveLesson] = useState(getDailyLesson(verbs));
+const LessonSentence = ({ lesson }) => {
+    const activeLesson = lesson ?? getDailyLesson(verbs)
 
     if (!activeLesson || typeof activeLesson !== "object") {
         return (
