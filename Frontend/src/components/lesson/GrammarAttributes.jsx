@@ -77,7 +77,7 @@ const GrammarAttributes = ({ lesson }) => {
     return (
         <dl
             aria-label="Atributos gramaticales"
-            className="grid w-full auto-rows-fr grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
+            className="grid w-full auto-rows-fr grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-3"
         >
             {attributes.map((attribute) => (
                 <div
