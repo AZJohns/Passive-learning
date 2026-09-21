@@ -13,14 +13,6 @@ const getConjugationDescription = (irregular) => {
     return "Tipo no indicado"
 }
 
-const materialSymbols = {
-    eco: "\uea35",
-    tune: "\ue429",
-    translate: "\ue8e2",
-    schedule: "\uefd6",
-    group: "\uea21",
-}
-
 const GrammarAttributes = ({ lesson }) => {
     if (!lesson || typeof lesson !== "object") {
         return null
@@ -30,77 +22,156 @@ const GrammarAttributes = ({ lesson }) => {
         {
             field: "baseVerb",
             label: "Verbo",
-            icon: materialSymbols.eco,
+            icon: "eco",
             value: lesson.baseVerb,
             description: "Infinitivo",
             backgroundClass: "bg-verb-bg",
             accentClass: "text-verb",
+            desktopPosition: "lg:col-start-1 lg:row-start-1",
         },
         {
             field: "conjugation",
             label: "Conjugación",
-            icon: materialSymbols.tune,
+            icon: "tune",
             value: lesson.conjugation,
             description: getConjugationDescription(lesson.irregular),
             backgroundClass: "bg-conjugation-bg",
             accentClass: "text-conjugation",
+            desktopPosition: "lg:col-start-5 lg:row-start-1",
         },
         {
             field: "verbTranslation",
             label: "Traducción",
-            icon: materialSymbols.translate,
+            icon: "translate",
             value: lesson.verbTranslation,
             description: "Sentido base",
             backgroundClass: "bg-translation-bg",
             accentClass: "text-translation",
+            desktopPosition: "lg:col-start-9 lg:row-start-1",
         },
         {
             field: "tense",
             label: "Tiempo",
-            icon: materialSymbols.schedule,
+            icon: "schedule",
             value: lesson.tense,
             description: lesson.tenseTranslation,
             backgroundClass: "bg-tense-bg",
             accentClass: "text-tense",
+            desktopPosition: "lg:col-start-2 lg:row-start-2",
         },
         {
             field: "subject",
             label: "Sujeto",
-            icon: materialSymbols.group,
+            icon: "group",
             value: lesson.subject,
             description: lesson.subjectTranslation,
             backgroundClass: "bg-subject-bg",
             accentClass: "text-subject",
+            desktopPosition: "lg:col-start-8 lg:row-start-2",
         },
     ]
 
     return (
         <dl
             aria-label="Atributos gramaticales"
-            className="grid w-full auto-rows-fr grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-3"
+            className="
+                grid w-full
+                auto-rows-fr
+                grid-cols-1
+                gap-3
+                min-[420px]:grid-cols-2
+                md:grid-cols-3
+                lg:grid-cols-12
+                lg:gap-4
+            "
         >
             {attributes.map((attribute) => (
                 <div
-                    className={`flex h-full min-w-0 flex-col rounded-xl border border-black/[0.03] px-2.5 py-3.5 shadow-sm shadow-slate-900/5 ${attribute.backgroundClass}`}
                     key={attribute.field}
+                    className={`
+                        flex min-h-[128px] min-w-0 flex-col
+                        rounded-2xl
+                        border border-black/[0.04]
+                        px-4 py-3.5
+                        shadow-sm shadow-slate-900/5
+                        transition-all duration-200
+                        hover:-translate-y-0.5
+                        hover:shadow-md
+                        md:col-span-1
+                        lg:col-span-4
+                        ${attribute.backgroundClass}
+                        ${attribute.desktopPosition}
+                    `}
                 >
-                    <dt className={`flex min-w-0 items-start gap-0.5 ${attribute.accentClass}`}>
+                    {/* Encabezado */}
+                    <dt
+                        className={`
+                            flex min-w-0 items-center gap-2.5
+                            ${attribute.accentClass}
+                        `}
+                    >
+                        {/* Contenedor del icono */}
                         <span
                             aria-hidden="true"
-                            className="material-symbols-outlined inline-flex size-4 shrink-0 items-center justify-center overflow-hidden text-base leading-none"
+                            className="
+                                flex size-8 shrink-0
+                                items-center justify-center
+                                rounded-lg
+                                bg-white/60
+                                ring-1 ring-black/[0.04]
+                            "
                         >
-                            {attribute.icon}
+                            <span className="material-symbols-outlined text-[19px] leading-none">
+                                {attribute.icon}
+                            </span>
                         </span>
-                        <span className="min-w-0 flex-1 whitespace-normal break-words text-[10px] font-bold uppercase leading-tight tracking-[0.025em]">
+
+                        {/* Título */}
+                        <span
+                            className="
+                                min-w-0
+                                whitespace-normal
+                                break-words
+                                text-[10px]
+                                font-bold
+                                uppercase
+                                leading-tight
+                                tracking-[0.04em]
+                            "
+                        >
                             {attribute.label}
                         </span>
                     </dt>
 
-                    <dd className="mt-3 min-w-0 whitespace-normal break-words text-base font-bold leading-snug text-text">
+                    {/* Valor principal */}
+                    <dd
+                        className="
+                            mt-3
+                            min-w-0
+                            whitespace-normal
+                            break-words
+                            text-[17px]
+                            font-bold
+                            leading-snug
+                            text-text
+                        "
+                    >
                         {getText(attribute.value)}
                     </dd>
 
-                    <dd className="mt-auto min-w-0 whitespace-normal break-words pt-2 text-[11px] leading-snug text-secondary">
+                    {/* Descripción */}
+                    <dd
+                        className="
+                            mt-auto
+                            min-w-0
+                            whitespace-normal
+                            break-words
+                            pt-2
+                            text-[11px]
+                            leading-snug
+                            text-secondary
+                        "
+                    >
                         {getText(attribute.description)}
                     </dd>
                 </div>
