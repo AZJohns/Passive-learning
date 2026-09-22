@@ -1,0 +1,19 @@
+# Node y Vite
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env
+.env.*
+!.env.example
+
+# Rust y Tauri
+Frontend/src-tauri/target/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Audios WAV intermedios
+/audios_generados/
