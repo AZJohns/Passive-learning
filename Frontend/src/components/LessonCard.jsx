@@ -10,7 +10,7 @@ import { getRandomLesson } from "../utils/getRandomLesson.js"
 import { useState, useEffect } from "react"
 
 
-
+// funcion para obtener el texto
 const getText = (value) => {
     if (typeof value === "string" || typeof value === "number") {
         return String(value)

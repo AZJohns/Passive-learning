@@ -33,33 +33,41 @@ const LessonSentence = ({ lesson }) => {
     const renderSentence = (sentence, conjugation) => {
         const sentenceText = getText(sentence)
         const conjugationText = getText(conjugation)
-        const conjugationIndex = conjugationText ? sentenceText.indexOf(conjugationText) : -1
+        const conjugationIndex = conjugationText ? sentenceText.toLowerCase().indexOf(conjugationText.toLowerCase()) : -1;
 
         if (conjugationIndex === -1) {
             return sentenceText
         }
+        const conjugationEnd =
+            conjugationIndex + conjugationText.length;
 
         return (
             <>
                 {sentenceText.slice(0, conjugationIndex)}
-                <span>{sentenceText.slice(conjugationIndex, conjugationIndex + conjugationText.length)}</span>
-                {sentenceText.slice(conjugationIndex + conjugationText.length)}
+
+                <span className="font-bold text-blue-600">
+                    {sentenceText.slice(
+                        conjugationIndex,
+                        conjugationEnd
+                    )}
+                </span>
+                {sentenceText.slice(conjugationEnd)}
             </>
         )
     }
 
     return (
-        // <div>
-        //     <h1>Lesson sentence va la frace principal</h1>
-        // </div>
+
         <article className="flex min-h-[68px] flex-1 flex-col items-center justify-center px-3">
-            <h2 className="text-center font-black text-[19px] leading-[1.15] uppercase tracking-tight text-gray-800">
+            {/* frase principal */}
+            <h2 className="text-center text-[19px] leading-[1.15] uppercase tracking-tight text-gray-800 ">
+
                 {renderSentence(
                     activeLesson.sentence,
                     activeLesson.conjugation
                 )}
-                {/* La frase principal */}
             </h2>
+
             <p className="mt-1 text-center text-xs leading-snug font-medium text-gray-500">
                 {getText(activeLesson.sentenceTranslation)}
                 {/* traduccion de la frase principal */}
