@@ -2,7 +2,7 @@ import './App.css'
 import LessonCard from './components/LessonCard'
 import Login from './pages/LoginPage'
 import Home from './pages/Home'
-// import Register from './pages/RegisterPage'
+import Register from './pages/RegisterPage'
 import { Routes, Route } from 'react-router'
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
 
         //ruta para register
-        {/* <Route path="register" element={<Register />} /> */}
+        <Route path="register" element={<Register />} />
 
         // Ruta para la leccion diaria
         <Route path="/lesson" element={<LessonCard />} />

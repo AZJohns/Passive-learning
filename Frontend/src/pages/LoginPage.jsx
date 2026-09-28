@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
-// import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react';
+import { Link, useNavigate } from 'react-router';
 
 export default function LoginPage() {
     // const { login } = useAuth();
@@ -49,14 +49,15 @@ export default function LoginPage() {
                                 K
                             </div>
                             <span className="text-xl font-bold text-slate-800">
-                                Passive-Learning <span className="text-blue-600">Admin</span>
+                                Passive-Learning 
+                                {/* <span className="text-blue-600">Admin</span> */}
                             </span>
                         </div>
 
                         {/* Heading */}
                         <div className="mb-7">
                             <h1 className="text-2xl font-bold text-slate-900 leading-tight">Iniciar sesión</h1>
-                            <p className="text-sm text-slate-500 mt-1">Acceso exclusivo para administradores</p>
+                            {/* <p className="text-sm text-slate-500 mt-1">Acceso exclusivo para administradores</p> */}
                         </div>
 
                         {/* Error */}
@@ -85,7 +86,7 @@ export default function LoginPage() {
                                         required
                                         autoComplete="email"
                                         className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl bg-slate-50 text-slate-900 text-sm placeholder:text-slate-400 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white"
-                                        placeholder="admin@kaprichos.com"
+                                        placeholder="john@passivelearning.com"
                                         value={form.email}
                                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                                     />
@@ -136,6 +137,15 @@ export default function LoginPage() {
                                 )}
                             </button>
                         </form>
+                        <p className="text-center text-sm text-slate-500 mt-6">
+                            ¿Aun no tienes una cuenta?{' '}
+                            <Link
+                                to="/register"
+                                className="font-semibold text-blue-600 hover:text-blue-700"
+                            >
+                                Registrate
+                            </Link>
+                        </p>
                     </div>
                 </div>
 
