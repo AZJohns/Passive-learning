@@ -309,6 +309,15 @@ export default function RegisterPage() {
                                 Inicia sesión
                             </Link>
                         </p>
+                        {/* boton de volver atras */}
+                        <p className="text-center text-sm text-slate-500 mt-6">
+                            <Link
+                                to="/"
+                                className="font-semibold text-blue-600 hover:text-blue-700"
+                            >
+                                Volver
+                            </Link>
+                        </p>
                     </div>
                 </div>
 

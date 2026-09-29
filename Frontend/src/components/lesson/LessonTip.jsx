@@ -40,21 +40,28 @@ const LessonTip = ({ lesson }) => {
         //         </span>
         //     </div>
         // </div>
-        <article className="bg-blue-50/80 border border-blue-100 px-3 py-2 flex items-center justify-center gap-2 shrink-0 rounded-xl min-h-10">
-            <div className="p-1 rounded-lg bg-white shadow-xs text-tense shrink-0 ">
-                <span className="material-symbols-outlined text-[18px] ">lightbulb</span>
+        <article className="flex min-h-16 items-start gap-3 rounded-xl border border-blue-100 bg-blue-50/80 px-4 py-3">
+            <div
+                className="mt-0.5 shrink-0 rounded-lg bg-white p-1.5 text-blue-600 shadow-xs"
+                aria-hidden="true"
+            >
+                <span className="material-symbols-outlined block text-[19px]">
+                    lightbulb
+                </span>
             </div>
-            <p className="min-w-0 text-l leading-snug font-semibold text-blue-700 text-center">
 
-                {conjugationText}
+            <div className="min-w-0 flex-1">
+                <p className="text-xs font-semibold uppercase tracking-wide text-blue-600">
+                    Consejo de conjugación
+                </p>
 
-            </p>
-
-            <p className="min-w-0 text-xs leading-snug font-semibold text-blue-700 text-center">
-
-                {ruleText}
-
-            </p>
+                <p className="mt-1 text-sm font-medium leading-relaxed text-slate-700 sm:text-base">
+                    <span className="font-bold text-blue-700">
+                        {conjugationText}:
+                    </span>{" "}
+                    {ruleText}
+                </p>
+            </div>
         </article>
     )
 }

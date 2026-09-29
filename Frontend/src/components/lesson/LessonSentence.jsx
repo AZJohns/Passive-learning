@@ -60,7 +60,7 @@ const LessonSentence = ({ lesson }) => {
 
         <article className="flex min-h-[68px] flex-1 flex-col items-center justify-center px-3">
             {/* frase principal */}
-            <h2 className="text-center text-[19px] leading-[1.15] uppercase tracking-tight text-gray-800 ">
+            <h2 className="text-center font-bold text-[19px] leading-[1.15] uppercase tracking-tight text-gray-800 ">
 
                 {renderSentence(
                     activeLesson.sentence,
@@ -69,8 +69,8 @@ const LessonSentence = ({ lesson }) => {
             </h2>
 
             <p className="mt-1 text-center text-xs leading-snug font-medium text-gray-500">
-                {getText(activeLesson.sentenceTranslation)}
                 {/* traduccion de la frase principal */}
+                {getText(activeLesson.sentenceTranslation)}
             </p>
         </article>
     );
