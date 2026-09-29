@@ -49,7 +49,7 @@ export default function LoginPage() {
                                 K
                             </div>
                             <span className="text-xl font-bold text-slate-800">
-                                Passive-Learning 
+                                Passive-Learning
                                 {/* <span className="text-blue-600">Admin</span> */}
                             </span>
                         </div>
@@ -137,6 +137,7 @@ export default function LoginPage() {
                                 )}
                             </button>
                         </form>
+
                         <p className="text-center text-sm text-slate-500 mt-6">
                             ¿Aun no tienes una cuenta?{' '}
                             <Link
@@ -146,13 +147,24 @@ export default function LoginPage() {
                                 Registrate
                             </Link>
                         </p>
-                    </div>
-                </div>
 
-                {/* Footer */}
-                <p className="text-center text-xs text-slate-400 mt-5">
-                    &copy; {new Date().getFullYear()} Passive-Learning. Todos los derechos reservados.
-                </p>
+                        {/* boton de volver atras */}
+                        <p className="text-center text-sm text-slate-500 mt-6">
+                            <Link
+                                to="/"
+                                className="font-semibold text-blue-600 hover:text-blue-700"
+                            >
+                                Volver
+                            </Link>
+                        </p>
+            
+                    </div>
+
+                    {/* Footer */}
+                    <p className="text-center text-xs text-slate-400 mt-5">
+                        &copy; {new Date().getFullYear()} Passive-Learning. Todos los derechos reservados.
+                    </p>
+                </div>
             </div>
         </div>
     );
