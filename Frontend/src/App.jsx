@@ -3,6 +3,7 @@ import LessonCard from './components/LessonCard'
 import Login from './pages/LoginPage'
 import Home from './pages/Home'
 import Register from './pages/RegisterPage'
+import HomePublic from './pages/HomePublic'
 import { Routes, Route } from 'react-router'
 
 function App() {
@@ -21,9 +22,11 @@ function App() {
         // Ruta para la leccion diaria
         <Route path="/lesson" element={<LessonCard />} />
 
+        <Route path="/home" element={<Home />} />
 
+        
         // ruta principal 
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePublic />} />
       </Routes >
 
     </div>
